@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:demo/pages/home_page.dart';
+import 'package:demo/pages/login//login_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,13 +13,13 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static final String title = 'Speech to Text';
+  static final String title = 'Demo';
 
   @override
   Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner: false,
     title: title,
     theme: ThemeData(primarySwatch: Colors.purple),
-    home: HomePage(),
+    home: LoginPage(),
   );
 }
