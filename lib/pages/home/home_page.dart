@@ -1,11 +1,11 @@
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/api/speech_api.dart';
 import 'package:demo/main.dart';
 import 'package:demo/widget/substring_highlighted.dart';
+import 'package:demo/service/auth.dart';
 
-import '../utils.dart';
+import 'package:demo/utils.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,24 +15,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String text = 'Press the button and start speaking';
   bool isListening = false;
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: Text(MyApp.title),
       centerTitle: true,
-      actions: [
-        Builder(
-          builder: (context) => IconButton(
-            icon: Icon(Icons.content_copy),
-            onPressed: () async {
-              await FlutterClipboard.copy(text);
-
-              Scaffold.of(context).showSnackBar(
-                SnackBar(content: Text('✓   Copied to Clipboard')),
-              );
-            },
-          ),
+      actions: <Widget>[
+        ElevatedButton.icon(
+          icon: Icon(Icons.person),
+          style: ElevatedButton.styleFrom(primary: Colors.brown[400]),
+          label: Text('logout'),
+          onPressed: () async {
+            await _auth.signOut();
+          },
         ),
       ],
     ),
