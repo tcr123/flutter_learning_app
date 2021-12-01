@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
       actions: <Widget>[
         ElevatedButton.icon(
           icon: Icon(Icons.person),
-          style: ElevatedButton.styleFrom(primary: Colors.brown[400]),
           label: Text('logout'),
           onPressed: () async {
             await _auth.signOut();
@@ -70,7 +69,7 @@ class _HomePageState extends State<HomePage> {
 
       if (!isListening) {
         Future.delayed(Duration(seconds: 1), () {
-          // Utils.scanText(text);
+          Utils.scanText(text);
         });
       }
     },
