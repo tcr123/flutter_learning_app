@@ -1,0 +1,1 @@
+remember customer_list and customer_tile is just use as a debugging tools.
