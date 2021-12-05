@@ -4,8 +4,7 @@ import 'package:demo/pages/home/list/class_tile.dart';
 import 'package:demo/service/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:demo/models/customer.dart';
-import 'package:demo/pages/home/customer_tile.dart';
+import 'package:demo/models/Id.dart';
 
 class ClassList extends StatefulWidget {
   const ClassList({Key? key}) : super(key: key);
@@ -18,11 +17,12 @@ class _ClassListState extends State<ClassList> {
   @override
   Widget build(BuildContext context) {
     final classModel = Provider.of<List<ClassModel>?>(context);
+    final user = Provider.of<Id?>(context);
 
     List<ClassModel> result = [];
-    if (classModel != null) {
+    if (classModel != null && user != null) {
       result =
-          (classModel.where((item) => item.lecture_name == "chun")).toList();
+          (classModel.where((item) => item.user_id == user.user_id)).toList();
     }
 
     return ListView.builder(

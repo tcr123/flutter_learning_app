@@ -10,11 +10,12 @@ class ClassDataBaseService {
       FirebaseFirestore.instance.collection("classes");
 
   Future<void> updateClassData(
-      String class_name, String subject, String lecture_name) async {
+      String class_name, String subject, String lecture_name, String user_id) async {
     return await classCollection.doc(class_code).set({
       'class name': class_name,
       'subject': subject,
       'lecture name': lecture_name,
+      'user id': user_id,
     });
   }
 
@@ -23,7 +24,8 @@ class ClassDataBaseService {
       return ClassModel(
           class_name: (doc.data() as dynamic)['class name'] ?? '',
           subject: (doc.data() as dynamic)['subject'] ?? '',
-          lecture_name: (doc.data() as dynamic)['lecture name'] ?? '');
+          lecture_name: (doc.data() as dynamic)['lecture name'] ?? '',
+          user_id: (doc.data() as dynamic)['user id'] ?? '');
     }).toList();
   }
 

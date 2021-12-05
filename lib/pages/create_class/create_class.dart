@@ -30,8 +30,13 @@ class _CreateClassState extends State<CreateClass> {
               ),
               // modified after the your project done
               onPressed: () async {
-                await ClassDataBaseService(class_code: class_code)
-                    .updateClassData(class_name, subject, lecture_name);
+                if (user != null) {
+                  await ClassDataBaseService(class_code: class_code)
+                      .updateClassData(
+                          class_name, subject, lecture_name, user.user_id);
+                } else {
+                  print("user id not found");
+                }
                 Navigator.pop(context);
               },
               child: Text(
