@@ -3,7 +3,7 @@ import 'package:demo/service/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:demo/models/customer.dart';
-import 'package:demo/pages/home/customer_tile.dart';
+import 'package:demo/pages/home/list/customer_tile.dart';
 
 class CustomerList extends StatefulWidget {
   const CustomerList({Key? key}) : super(key: key);

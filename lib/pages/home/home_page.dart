@@ -4,14 +4,13 @@ import 'package:demo/pages/create_class/create_class.dart';
 import 'package:demo/pages/home/list/class_list.dart';
 import 'package:demo/pages/home/list/class_tile.dart';
 import 'package:demo/pages/join_class/join_class.dart';
-import 'package:demo/service/database.dart';
+import 'package:demo/database/database.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/api/speech_api.dart';
 import 'package:demo/main.dart';
 import 'package:demo/service/auth.dart';
 import 'package:demo/utils.dart';
 import 'package:provider/provider.dart';
-import 'package:demo/pages/home/customer_list.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -38,7 +37,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return StreamProvider.value(
       initialData: null,
-      value: ClassDataBaseService(class_code: "").classes,
+      value: ClassDataBaseService().classes,
       child: Scaffold(
         appBar: AppBar(
           title: Text(MyApp.title),

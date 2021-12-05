@@ -17,7 +17,7 @@ class CustomerTile extends StatelessWidget {
             backgroundColor: Colors.brown,
           ),
           title: Text(customer.name),
-          subtitle: Text("You have ${customer.token} token"),
+          subtitle: Text("You have ${customer.score} token"),
         ),
       ),
     );

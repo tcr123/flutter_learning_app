@@ -19,17 +19,30 @@ class _ClassListState extends State<ClassList> {
     final classModel = Provider.of<List<ClassModel>?>(context);
     final user = Provider.of<Id?>(context);
 
+    bool show_class = false;
     List<ClassModel> result = [];
     if (classModel != null && user != null) {
       result =
           (classModel.where((item) => item.user_id == user.user_id)).toList();
     }
 
-    return ListView.builder(
-      itemCount: result.length,
-      itemBuilder: (context, index) {
-        return ClassTile(classes: result[index]);
-      },
+    if (result.isNotEmpty) {
+      show_class = true;
+    }
+
+    return show_class ? ListView.builder(
+        itemCount: result.length,
+        itemBuilder: (context, index) {
+          return ClassTile(classes: result[index]);
+        },
+      ) : Center(
+        child: Text(
+          "Not Classes Found",
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
     );
   }
 }

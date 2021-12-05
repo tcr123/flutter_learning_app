@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/models/customer.dart';
+import 'package:demo/models/class_model.dart';
 
 class DatabaseService {
   final String uid;
@@ -8,11 +9,17 @@ class DatabaseService {
   final CollectionReference clietCollection =
       FirebaseFirestore.instance.collection("customers");
 
-  Future<void> updateUserData(String classes, String name, int token) async {
+  Future<void> updateUserData(String classes, String name, int score) async {
     return await clietCollection.doc(uid).set({
       'classes': classes,
       'name': name,
-      'token': token,
+      'score': score,
+    });
+  }
+
+  Future<void> updateClassListData(List<ClassModel> class_data) async {
+    return await clietCollection.doc(uid).set({
+      'class data': class_data,
     });
   }
 
@@ -21,7 +28,7 @@ class DatabaseService {
       return Customer(
           name: (doc.data() as dynamic)['name'] ?? '',
           classes: (doc.data() as dynamic)['classes'] ?? '0',
-          token: (doc.data() as dynamic)['token'] ?? 0
+          score: (doc.data() as dynamic)['score'] ?? 0,
         );
     }).toList();
   }
