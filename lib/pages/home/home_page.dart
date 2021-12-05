@@ -1,6 +1,9 @@
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:demo/pages/authentication/create_class/create_class.dart';
-import 'package:demo/pages/authentication/join_class/join_class.dart';
+import 'package:demo/database/class_data.dart';
+import 'package:demo/pages/create_class/create_class.dart';
+import 'package:demo/pages/home/list/class_list.dart';
+import 'package:demo/pages/home/list/class_tile.dart';
+import 'package:demo/pages/join_class/join_class.dart';
 import 'package:demo/service/database.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/api/speech_api.dart';
@@ -35,7 +38,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return StreamProvider.value(
       initialData: null,
-      value: DatabaseService(uid: "").customers,
+      value: ClassDataBaseService(class_code: "").classes,
       child: Scaffold(
         appBar: AppBar(
           title: Text(MyApp.title),
@@ -50,10 +53,8 @@ class _HomePageState extends State<HomePage>
                               builder: (context) => CreateClass()));
                     }
                     if (value == 2) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => JoinClass()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => JoinClass()));
                     }
                   });
                 },
@@ -103,7 +104,14 @@ class _HomePageState extends State<HomePage>
             ],
           ),
         ),
-        body: CustomerList(),
+        body: TabBarView(
+          controller: _controller,
+          children: [
+            Text("hi"),
+            ClassList(),
+            Text("hi3"),
+          ],
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: AvatarGlow(
           animate: isListening,
