@@ -9,7 +9,7 @@ class EnrolledDataBaseService {
   late final CollectionReference enrolledCollection =
       FirebaseFirestore.instance.collection(uid);
 
-  Future<void> updateClassData(String class_name, String class_code,
+  Future<void> updateEnrolledData(String class_name, String class_code,
       String subject, String lecture_name) async {
     return await enrolledCollection.doc(class_code).set({
       'class name': class_name,
@@ -18,7 +18,7 @@ class EnrolledDataBaseService {
     });
   }
 
-  List<EnrolledModel> _classListFromSnapshot(QuerySnapshot snapshot) {
+  List<EnrolledModel> _enrolledListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return EnrolledModel(
           class_name: (doc.data() as dynamic)['class name'] ?? '',
@@ -27,7 +27,7 @@ class EnrolledDataBaseService {
     }).toList();
   }
 
-  Stream<List<EnrolledModel>> get classes {
-    return enrolledCollection.snapshots().map(_classListFromSnapshot);
+  Stream<List<EnrolledModel>> get enrolled {
+    return enrolledCollection.snapshots().map(_enrolledListFromSnapshot);
   }
 }

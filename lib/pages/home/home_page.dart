@@ -1,16 +1,18 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:demo/database/class_data.dart';
+import 'package:demo/database/enrolled_data.dart';
 import 'package:demo/pages/create_class/create_class.dart';
 import 'package:demo/pages/home/list/class_list.dart';
-import 'package:demo/pages/home/list/class_tile.dart';
+import 'package:demo/pages/home/list/enrolled_list.dart';
 import 'package:demo/pages/join_class/join_class.dart';
-import 'package:demo/database/database.dart';
+import 'package:demo/service/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:demo/api/speech_api.dart';
 import 'package:demo/main.dart';
 import 'package:demo/service/auth.dart';
 import 'package:demo/utils.dart';
 import 'package:provider/provider.dart';
+import 'package:demo/models/Id.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -35,9 +37,12 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider.value(
-      initialData: null,
-      value: ClassDataBaseService().classes,
+    final user = Provider.of<Id?>(context);
+    return user != null ? MultiProvider(
+      providers: [
+        StreamProvider.value(value: ClassDataBaseService().classes, initialData: null),
+        StreamProvider.value(value: EnrolledDataBaseService(uid: user.user_id).enrolled, initialData: null),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: Text(MyApp.title),
@@ -53,7 +58,12 @@ class _HomePageState extends State<HomePage>
                     }
                     if (value == 2) {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => JoinClass()));
+                          MaterialPageRoute(builder: (context) => StreamProvider.value(
+                            initialData: null,
+                            value: ClassDataBaseService().classes,
+                            child: JoinClass())
+                          )
+                      );
                     }
                   });
                 },
@@ -106,7 +116,7 @@ class _HomePageState extends State<HomePage>
         body: TabBarView(
           controller: _controller,
           children: [
-            Text("hi"),
+            EnrolledList(),
             ClassList(),
             Text("hi3"),
           ],
@@ -122,7 +132,7 @@ class _HomePageState extends State<HomePage>
           ),
         ),
       ),
-    );
+    ) : Loading();
   }
 
   Future toggleRecording() => SpeechApi.toggleRecording(
