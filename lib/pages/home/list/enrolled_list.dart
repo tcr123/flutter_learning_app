@@ -14,12 +14,20 @@ class _EnrolledListState extends State<EnrolledList> {
   @override
   Widget build(BuildContext context) {
     final enrolledModel = Provider.of<List<EnrolledModel>?>(context);
+    bool showClass = false;
 
-    return enrolledModel != null
+    List<EnrolledModel> enrolled = [];
+    if (enrolledModel != null) enrolled = enrolledModel;
+
+    if (enrolled.isNotEmpty) {
+      showClass = true;
+    }
+
+    return showClass
         ? ListView.builder(
-            itemCount: enrolledModel.length,
+            itemCount: enrolled.length,
             itemBuilder: (context, index) {
-              return EnrolledTile(enrolled: enrolledModel[index]);
+              return EnrolledTile(enrolled: enrolled[index]);
             },
           )
         : Center(

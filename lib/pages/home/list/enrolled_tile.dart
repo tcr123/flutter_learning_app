@@ -16,7 +16,7 @@ class EnrolledTile extends StatelessWidget {
             ListTile(
               leading: CircleAvatar(
                 radius: 25,
-                backgroundColor: Colors.red[500],
+                backgroundColor: Colors.black,
               ),
               title: Text(enrolled.class_name),
               subtitle: Text("Subject: ${enrolled.subject}"),

@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage>
           children: [
             EnrolledList(),
             ClassList(),
-            Text("hi3"),
+            Text("hi"),
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

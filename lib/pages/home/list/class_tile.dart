@@ -1,5 +1,8 @@
 import 'package:demo/models/class_model.dart';
+import 'package:demo/pages/class_page/class_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:demo/database/class_data.dart';
 
 class ClassTile extends StatelessWidget {
   final ClassModel classes;
@@ -14,17 +17,29 @@ class ClassTile extends StatelessWidget {
         child: Column(
           children: <Widget>[
             ListTile(
+              onTap: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => StreamProvider.value(
+                      initialData: null,
+                      value: ClassDataBaseService().data,
+                      child: LecturerPage(class_code: classes.class_code, students: false,)))
+                );
+              },
               leading: CircleAvatar(
                 radius: 25,
-                backgroundColor: Colors.red[500],
+                backgroundColor: Colors.black,
               ),
               title: Text(classes.class_name),
               subtitle: Text("Subject: ${classes.subject}"),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[Text("Lecture: ${classes.lecture_name}"),
-              SizedBox(width: 12.0,)
+              children: <Widget>[
+                Text("Lecture: ${classes.lecture_name}"),
+                SizedBox(
+                  width: 12.0,
+                )
               ],
             ),
           ],
