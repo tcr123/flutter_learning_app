@@ -20,11 +20,13 @@ class _JoinClassState extends State<JoinClass>
   String subject = '';
   late TabController _controller;
   TextEditingController editingController = TextEditingController();
+  List<ClassModel>? classList;
 
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this, initialIndex: 0);
+    classList = [];
   }
 
   @override
@@ -34,10 +36,6 @@ class _JoinClassState extends State<JoinClass>
     final classModel = Provider.of<List<ClassModel>?>(context);
 
     ClassModel result;
-    List<ClassModel> classList = [];
-    if (classModel != null) {
-      classList = classModel;
-    }
 
     return Scaffold(
         appBar: AppBar(
@@ -64,7 +62,7 @@ class _JoinClassState extends State<JoinClass>
         ),
         body: TabBarView(controller: _controller, children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
             child: Form(
               child: Column(
                 children: <Widget>[
@@ -131,7 +129,20 @@ class _JoinClassState extends State<JoinClass>
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     // just a demo for search bar
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      if (classModel != null) {
+                        setState(() {
+                          classList!.clear();
+                          classList = classModel
+                              .where((element) =>
+                                  element.class_name.contains(value))
+                              .toList();
+                          print(classList!.length);
+                        });
+                      } else {
+                        print("class model not found");
+                      }
+                    },
                     controller: editingController,
                     decoration: InputDecoration(
                         labelText: "Search",
@@ -145,17 +156,15 @@ class _JoinClassState extends State<JoinClass>
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: classList.length,
+                    itemCount: classList!.length,
                     itemBuilder: (context, index) {
-                      return ClassTile(classes: classList[index]);
+                      return ClassTile(classes: classList![index]);
                     },
                   ),
                 ),
               ],
             ),
           ),
-        ]
-      )
-    );
+        ]));
   }
 }
