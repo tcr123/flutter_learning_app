@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage>
             PopupMenuButton(
                 onSelected: (value) {
                   setState(() {
-                    if (value == 1) {
+                    if (value == 2) {
                       _auth.signOut();
                     }
                   });
@@ -93,8 +93,12 @@ class _HomePageState extends State<HomePage>
                 icon: Icon(Icons.settings),
                 itemBuilder: (context) => [
                       PopupMenuItem(
-                        child: Text("Log Out"),
+                        child: Text("Profile"),
                         value: 1,
+                      ),
+                      PopupMenuItem(
+                        child: Text("Log Out"),
+                        value: 2,
                       ),
                     ]),
           ],
@@ -131,20 +135,21 @@ class _HomePageState extends State<HomePage>
             onPressed: toggleRecording,
           ),
         ),
+        
       ),
     ) : Loading();
   }
 
   Future toggleRecording() => SpeechApi.toggleRecording(
-        onResult: (text) => setState(() => this.text = text),
-        onListening: (isListening) {
-          setState(() => this.isListening = isListening);
+    onResult: (text) => setState(() => this.text = text),
+    onListening: (isListening) {
+      setState(() => this.isListening = isListening);
 
-          if (!isListening) {
-            Future.delayed(Duration(seconds: 1), () {
-              Utils.scanText(text);
-            });
-          }
-        },
-      );
+      if (!isListening) {
+        Future.delayed(Duration(seconds: 1), () {
+          Utils.scanText(text);
+        });
+      }
+    },
+  );
 }

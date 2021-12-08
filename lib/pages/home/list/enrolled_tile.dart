@@ -1,5 +1,8 @@
 import 'package:demo/models/enrolled_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:demo/database/class_data.dart';
+import 'package:demo/pages/class_page/class_page.dart';
 
 class EnrolledTile extends StatelessWidget {
   final EnrolledModel enrolled;
@@ -14,6 +17,15 @@ class EnrolledTile extends StatelessWidget {
         child: Column(
           children: <Widget>[
             ListTile(
+              onTap: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => StreamProvider.value(
+                      initialData: null,
+                      value: ClassDataBaseService().data,
+                      child: LecturerPage(class_code: enrolled.class_code, students: true)))
+                );
+              },
               leading: CircleAvatar(
                 radius: 25,
                 backgroundColor: Colors.black,

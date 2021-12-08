@@ -23,7 +23,7 @@ class ClassTile extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => StreamProvider.value(
                       initialData: null,
                       value: ClassDataBaseService().data,
-                      child: LecturerPage(class_code: classes.class_code, students: false,)))
+                      child: LecturerPage(class_code: classes.class_code, students: false)))
                 );
               },
               leading: CircleAvatar(

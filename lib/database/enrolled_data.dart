@@ -15,6 +15,7 @@ class EnrolledDataBaseService {
       'class name': class_name,
       'subject': subject,
       'lecture name': lecture_name,
+      'class code' : class_code,
     });
   }
 
@@ -23,8 +24,13 @@ class EnrolledDataBaseService {
       return EnrolledModel(
           class_name: (doc.data() as dynamic)['class name'] ?? '',
           subject: (doc.data() as dynamic)['subject'] ?? '',
-          lecture_name: (doc.data() as dynamic)['lecture name'] ?? '');
+          lecture_name: (doc.data() as dynamic)['lecture name'] ?? '',
+          class_code: (doc.data() as dynamic)['class name'] ?? '');
     }).toList();
+  }
+
+  Stream<QuerySnapshot> get data {
+    return enrolledCollection.snapshots();
   }
 
   Stream<List<EnrolledModel>> get enrolled {
