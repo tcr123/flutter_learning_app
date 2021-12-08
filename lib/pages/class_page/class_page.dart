@@ -10,6 +10,7 @@ import 'package:demo/database/class_data.dart';
 import 'package:demo/utils.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:demo/api/speech_api.dart';
+import 'package:demo/components/setting_form.dart';
 
 class LecturerPage extends StatefulWidget {
   String class_code;
@@ -55,6 +56,17 @@ class _LecturerPageState extends State<LecturerPage>
 
   @override
   Widget build(BuildContext context) {
+    void showSettingsPanel() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              child: SettingForm(),
+            );
+          });
+    }
+
     try {
       // --------------------------------------------------
       // use to determine the code of class
@@ -97,30 +109,35 @@ class _LecturerPageState extends State<LecturerPage>
         children: [
           LearningList(),
           VideoList(),
-          ForumPage(students: widget.students,),
-          FeedbackList(),
+          ForumPage(
+            students: widget.students,
+          ),
+          FeedbackList(students: widget.students),
         ],
       ),
       floatingActionButton: widget.students
           ? Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(32, 4, 0, 0),
-              child: AvatarGlow(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(32, 4, 0, 0),
+                child: AvatarGlow(
                   animate: isListening,
                   endRadius: 75,
                   glowColor: Theme.of(context).primaryColor,
                   child: FloatingActionButton(
-                    child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
+                    child: Icon(isListening ? Icons.mic : Icons.mic_none,
+                        size: 36),
                     onPressed: toggleRecording,
                   ),
                 ),
-            ),
-          )
-          : FloatingActionButton(
-                child: Icon(Icons.add, size: 36),
-                onPressed: () {},
               ),
+            )
+          : FloatingActionButton(
+              child: Icon(Icons.add, size: 36),
+              onPressed: () {
+                showSettingsPanel();
+              },
+            ),
     );
   }
 
