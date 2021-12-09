@@ -1,4 +1,5 @@
 import 'package:demo/components/feedback_form.dart';
+import 'package:demo/pages/feedback_page/feedback_detail.dart';
 import 'package:flutter/material.dart';
 
 class FeedbackList extends StatefulWidget {
@@ -63,7 +64,13 @@ class _FeedbackListState extends State<FeedbackList> {
                     elevation: 5,
                     child: ListTile(
                       onTap: () {
-                        if (widget.students) showSettingsPanel();
+                        if (widget.students)
+                          showSettingsPanel();
+                        else
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FeedbackDetailPage()));
                       },
                       title: Text(materials[index]),
                       leading: Icon(

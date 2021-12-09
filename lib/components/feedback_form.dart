@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class FeedbackForm extends StatefulWidget {
   const FeedbackForm({Key? key}) : super(key: key);
@@ -18,25 +19,32 @@ class _FeedbackFormState extends State<FeedbackForm> {
         children: <Widget>[
           Text(
             "Feedback",
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(fontSize: 26),
           ),
           SizedBox(
             height: 25,
           ),
           Text(
-            "Ratings : $_currentRatings",
-            style: TextStyle(fontSize: 18),
+            "Ratings",
+            style: TextStyle(fontSize: 20),
           ),
-          Slider(
-            value: _currentRatings.toDouble(),
-            activeColor: Colors.purple[_currentRatings * 180],
-            inactiveColor: Colors.purple[_currentRatings * 180],
-            min: 1,
-            max: 5,
-            divisions: 4,
-            onChanged: (val) => setState(() {
-              _currentRatings = val.round();
-            }),
+          SizedBox(
+            height: 10,
+          ),
+          RatingBar(
+            initialRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            ratingWidget: RatingWidget(
+              full: Icon(Icons.star, color: Colors.yellow,),
+              half: Icon(Icons.star_half, color: Colors.yellow,),
+              empty: Icon(Icons.star, color: Colors.yellow[200],),
+            ),
+            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            onRatingUpdate: (rating) {
+              print(rating);
+            },
           ),
           SizedBox(
             height: 15,

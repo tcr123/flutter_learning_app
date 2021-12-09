@@ -2,6 +2,7 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:demo/database/class_data.dart';
 import 'package:demo/database/enrolled_data.dart';
 import 'package:demo/pages/create_class/create_class.dart';
+import 'package:demo/pages/ebook_page/ebook_page.dart';
 import 'package:demo/pages/home/list/class_list.dart';
 import 'package:demo/pages/home/list/enrolled_list.dart';
 import 'package:demo/pages/join_class/join_class.dart';
@@ -122,7 +123,7 @@ class _HomePageState extends State<HomePage>
           children: [
             EnrolledList(),
             ClassList(),
-            Text("hi"),
+            EbookPage(),
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -135,7 +136,6 @@ class _HomePageState extends State<HomePage>
             onPressed: toggleRecording,
           ),
         ),
-        
       ),
     ) : Loading();
   }
