@@ -25,17 +25,6 @@ class _FeedbackListState extends State<FeedbackList> {
 
   @override
   Widget build(BuildContext context) {
-    void showSettingsPanel() {
-      showModalBottomSheet(
-          context: context,
-          builder: (context) {
-            return Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: FeedbackForm(),
-            );
-          });
-    }
-
     return ListView.builder(
         itemCount: materials.length,
         itemBuilder: (context, index) {
@@ -65,7 +54,10 @@ class _FeedbackListState extends State<FeedbackList> {
                     child: ListTile(
                       onTap: () {
                         if (widget.students)
-                          showSettingsPanel();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FeedbackForm()));
                         else
                           Navigator.push(
                               context,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:demo/models/class_model.dart';
 import 'package:demo/pages/home/list/class_tile.dart';
+import 'package:demo/pages/home/list/book_tile.dart';
 
 class EbookPage extends StatefulWidget {
   const EbookPage({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class _EbookPageState extends State<EbookPage>
                   setState(() {
                     classList!.clear();
                     classList = classModel
-                        .where((element) => element.class_name.contains(value))
+                        .where((element) => element.subject.contains(value))
                         .toList();
                     print(classList!.length);
                   });
@@ -71,7 +72,7 @@ class _EbookPageState extends State<EbookPage>
               shrinkWrap: true,
               itemCount: classList!.length,
               itemBuilder: (context, index) {
-                return ClassTile(classes: classList![index]);
+                return BookTile(classes: classList![index]);
               },
             ),
           ),
