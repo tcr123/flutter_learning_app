@@ -5,8 +5,8 @@ import 'package:demo/models/list_entry.dart';
 import 'package:demo/colors.dart';
 
 class ForumPage extends StatefulWidget {
-  bool students;
-  ForumPage({Key? key, required this.students}) : super(key: key);
+  bool isClose;
+  ForumPage({Key? key, required this.isClose}) : super(key: key);
 
   @override
   _ForumPageState createState() => new _ForumPageState();
@@ -74,7 +74,7 @@ class _ForumPageState extends State<ForumPage> {
                 Card(
                   margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 4.0),
                   elevation: 5,
-                  child: EntryItem(listItemsData[index], widget.students),
+                  child: EntryItem(listItemsData[index], widget.isClose),
                 ),
               ],
             ),
@@ -87,8 +87,8 @@ class _ForumPageState extends State<ForumPage> {
 
 class EntryItem extends StatelessWidget {
   final ListEntry entry;
-  bool students;
-  EntryItem(this.entry, this.students);
+  bool isClose;
+  EntryItem(this.entry, this.isClose);
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class EntryItem extends StatelessWidget {
         ),
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ForumDetailPage(students: students,)));
+              MaterialPageRoute(builder: (context) => ForumDetailPage(isClose: isClose,)));
         },
       ),
     );

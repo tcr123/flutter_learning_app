@@ -6,7 +6,8 @@ import 'package:demo/pages/class_page/class_page.dart';
 
 class EnrolledTile extends StatelessWidget {
   final EnrolledModel enrolled;
-  EnrolledTile({required this.enrolled});
+  bool isClose;
+  EnrolledTile({required this.enrolled, required this.isClose});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,15 @@ class EnrolledTile extends StatelessWidget {
             ListTile(
               onTap: () {
                 Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => StreamProvider.value(
-                      initialData: null,
-                      value: ClassDataBaseService().data,
-                      child: LecturerPage(class_code: enrolled.class_code, students: true)))
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => StreamProvider.value(
+                            initialData: null,
+                            value: ClassDataBaseService().data,
+                            child: LecturerPage(
+                                class_code: enrolled.class_code,
+                                isClose: isClose,
+                                students: true,))));
               },
               leading: CircleAvatar(
                 radius: 25,
@@ -35,8 +39,11 @@ class EnrolledTile extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[Text("Lecture: ${enrolled.lecture_name}"),
-              SizedBox(width: 12.0,)
+              children: <Widget>[
+                Text("Lecture: ${enrolled.lecture_name}"),
+                SizedBox(
+                  width: 12.0,
+                )
               ],
             ),
           ],

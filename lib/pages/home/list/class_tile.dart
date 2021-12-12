@@ -6,7 +6,8 @@ import 'package:demo/database/class_data.dart';
 
 class ClassTile extends StatelessWidget {
   final ClassModel classes;
-  ClassTile({required this.classes});
+  bool isClose;
+  ClassTile({required this.classes, required this.isClose});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,15 @@ class ClassTile extends StatelessWidget {
             ListTile(
               onTap: () {
                 Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => StreamProvider.value(
-                      initialData: null,
-                      value: ClassDataBaseService().data,
-                      child: LecturerPage(class_code: classes.class_code, students: false)))
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => StreamProvider.value(
+                            initialData: null,
+                            value: ClassDataBaseService().data,
+                            child: LecturerPage(
+                                class_code: classes.class_code,
+                                isClose: isClose,
+                                students: false,))));
               },
               leading: CircleAvatar(
                 radius: 25,

@@ -158,7 +158,7 @@ class _JoinClassState extends State<JoinClass>
                     shrinkWrap: true,
                     itemCount: classList!.length,
                     itemBuilder: (context, index) {
-                      return ClassTile(classes: classList![index]);
+                      return ClassTile(classes: classList![index], isClose: false);
                     },
                   ),
                 ),

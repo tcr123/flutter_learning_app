@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EnrolledList extends StatefulWidget {
-  const EnrolledList({Key? key}) : super(key: key);
+  bool isClose;
+  EnrolledList({Key? key, required this.isClose}) : super(key: key);
 
   @override
   _EnrolledListState createState() => _EnrolledListState();
@@ -27,7 +28,10 @@ class _EnrolledListState extends State<EnrolledList> {
         ? ListView.builder(
             itemCount: enrolled.length,
             itemBuilder: (context, index) {
-              return EnrolledTile(enrolled: enrolled[index]);
+              return EnrolledTile(
+                enrolled: enrolled[index],
+                isClose: widget.isClose,
+              );
             },
           )
         : Center(

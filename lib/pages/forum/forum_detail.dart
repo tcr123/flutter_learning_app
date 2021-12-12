@@ -5,8 +5,8 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:demo/pages/class_page/class_page.dart';
 
 class ForumDetailPage extends StatefulWidget {
-  bool students;
-  ForumDetailPage({required this.students});
+  bool isClose;
+  ForumDetailPage({required this.isClose});
   @override
   _ForumDetailPageState createState() => new _ForumDetailPageState();
 }
@@ -90,7 +90,7 @@ class _ForumDetailPageState extends State<ForumDetailPage> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: widget.students
+      floatingActionButton: widget.isClose
           ? AvatarGlow(
               animate: isListening,
               endRadius: 75,
