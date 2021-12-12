@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:demo/models/Id.dart';
 
 class ClassList extends StatefulWidget {
-  const ClassList({Key? key}) : super(key: key);
+  bool isClose;
+  ClassList({Key? key, required this.isClose}) : super(key: key);
 
   @override
   _ClassListState createState() => _ClassListState();
@@ -32,7 +33,10 @@ class _ClassListState extends State<ClassList> {
         ? ListView.builder(
             itemCount: classList.length,
             itemBuilder: (context, index) {
-              return ClassTile(classes: classList[index]);
+              return ClassTile(
+                classes: classList[index],
+                isClose: widget.isClose,
+              );
             },
           )
         : Center(

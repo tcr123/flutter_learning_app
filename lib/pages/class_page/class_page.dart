@@ -14,8 +14,8 @@ import 'package:demo/components/setting_form.dart';
 
 class LecturerPage extends StatefulWidget {
   String class_code;
-  bool students;
-  LecturerPage({Key? key, required this.class_code, required this.students})
+  bool isClose, students;
+  LecturerPage({Key? key, required this.class_code, required this.isClose, required this.students})
       : super(key: key);
 
   @override
@@ -110,7 +110,7 @@ class _LecturerPageState extends State<LecturerPage>
           LearningList(),
           VideoList(),
           ForumPage(
-            students: widget.students,
+            isClose: widget.isClose,
           ),
           FeedbackList(students: widget.students),
         ],
